@@ -9,8 +9,6 @@ import {
   Text,
   TextInput,
   View,
-  Modal,
-  Image,
 } from 'react-native';
 
 import { Spacing, MaxContentWidth, BottomTabInset } from '@/constants/theme';
@@ -171,7 +169,6 @@ export default function FormScreen() {
   const [terms, setTerms] = useState(false);
   const [betaOptIn, setBetaOptIn] = useState(false);
   const [submitted, setSubmitted] = useState(false);
-  const [modalVisible, setModalVisible] = useState(false);
 
   const setValue = (key: keyof typeof values, v: string) =>
     setValues((prev) => ({ ...prev, [key]: v }));
@@ -244,47 +241,6 @@ export default function FormScreen() {
       >
         <ThemedView style={styles.inner}>
           <ThemedText type="title" style={styles.mainTitle}>TUZA App</ThemedText>
-
-          {/* Button to open modal */}
-          <Pressable
-            onPress={() => setModalVisible(true)}
-            style={styles.viewImageButton}
-          >
-            <Text style={styles.viewImageButtonText}>View Profile Image</Text>
-          </Pressable>
-
-          {/* Modal Component */}
-          <Modal
-            animationType="fade"
-            transparent={true}
-            visible={modalVisible}
-            onRequestClose={() => setModalVisible(false)}
-          >
-            <View style={styles.modalOverlay}>
-              <View style={styles.modalContainer}>
-                <ThemedText type="subtitle" style={styles.modalTitle}>
-                  Profile Image
-                </ThemedText>
-                <ThemedText type="small" style={styles.modalDescription}>
-                  A self-contained overlay component that presents content above the current
-                  application view hierarchy.
-                </ThemedText>
-                
-                <Image
-                  source={{ uri: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=800' }}
-                  style={styles.modalImage}
-                  resizeMode="cover"
-                />
-
-                <Pressable
-                  onPress={() => setModalVisible(false)}
-                  style={styles.closeButton}
-                >
-                  <Text style={styles.closeButtonText}>Close Modal</Text>
-                </Pressable>
-              </View>
-            </View>
-          </Modal>
 
           {/* ---- PERSONAL INFORMATION ---- */}
           <SectionTitle>Personal Information</SectionTitle>
@@ -694,70 +650,6 @@ const styles = StyleSheet.create({
     borderWidth: 1,
   },
   resetText: {
-    fontSize: 16,
-    fontWeight: '600',
-  },
-  viewImageButton: {
-    backgroundColor: '#2f6fe4',
-    borderRadius: 10,
-    paddingVertical: 12,
-    paddingHorizontal: 20,
-    alignItems: 'center',
-    marginBottom: Spacing.four,
-  },
-  viewImageButtonText: {
-    color: '#fff',
-    fontSize: 15,
-    fontWeight: '600',
-  },
-  modalOverlay: {
-    flex: 1,
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
-    justifyContent: 'center',
-    alignItems: 'center',
-    padding: Spacing.four,
-  },
-  modalContainer: {
-    backgroundColor: '#fff',
-    borderRadius: 16,
-    padding: Spacing.five,
-    width: '90%',
-    maxWidth: 600,
-    alignItems: 'center',
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.25,
-    shadowRadius: 4,
-    elevation: 5,
-  },
-  modalTitle: {
-    fontSize: 24,
-    fontWeight: '700',
-    marginBottom: Spacing.two,
-    color: '#333',
-  },
-  modalDescription: {
-    fontSize: 14,
-    textAlign: 'center',
-    color: '#666',
-    marginBottom: Spacing.four,
-    lineHeight: 20,
-  },
-  modalImage: {
-    width: '100%',
-    height: 400,
-    marginBottom: Spacing.four,
-    borderRadius: 12,
-  },
-  closeButton: {
-    backgroundColor: '#2f6fe4',
-    borderRadius: 10,
-    paddingVertical: 12,
-    paddingHorizontal: 30,
-    marginTop: Spacing.two,
-  },
-  closeButtonText: {
-    color: '#fff',
     fontSize: 16,
     fontWeight: '600',
   },
